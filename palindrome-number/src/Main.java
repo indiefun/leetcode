@@ -5,6 +5,8 @@ public class Main {
         inspect(-121, false);
         inspect(10, false);
         inspect(-101, false);
+        inspect(12321, true);
+        inspect(123421, false);
     }
 
     private static void inspect(int input, boolean expect) {
