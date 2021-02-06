@@ -10,29 +10,30 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        ListNode root = null;
-        ListNode curr = null;
-        ListNode next = null;
-        int min_index, min_value;
-
-        while (true) {
-            min_index = lists.length;
-            min_value = Integer.MAX_VALUE;
-            for (int i = lists.length; --i >= 0; ) {
-                if (lists[i] != null && lists[i].val < min_value) {
-                    min_index = i;
-                    min_value = lists[i].val;
+        if (lists.length == 0) return null;
+        if (lists.length == 1) return lists[0];
+        ListNode root = new ListNode(Integer.MIN_VALUE);
+        ListNode prev, curr, next;
+        for (int i = lists.length; --i > -1; ) {
+            next = lists[i];
+            if (root.next == null) {
+                root.next = next;
+            } else {
+                curr = root;
+                prev = null;
+                while (next != null) {
+                    while (curr != null) {
+                        if (curr.val > next.val) break;
+                        prev = curr;
+                        curr = curr.next;
+                    }
+                    prev.next = next;
+                    next = next.next;
+                    prev.next.next = curr;
+                    prev = prev.next;
                 }
             }
-            if (min_index == lists.length) break;
-
-            lists[min_index] = lists[min_index].next;
-            next = new ListNode(min_value);
-
-            if (curr != null) curr.next = next;
-            curr = next;
-            if (root == null) root = curr;
         }
-        return root;
+        return root.next;
     }
 }

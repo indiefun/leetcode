@@ -1,12 +1,12 @@
 public class Main {
 
     public static void main(String[] args) {
-        inspect(new int[]{1, 1, 2, 3, 4, 4, 5, 6}, new int[]{1, 4, 5}, new int[]{1, 3, 4}, new int[]{2, 6});
-        inspect(new int[]{}, new int[]{});
-        inspect(new int[]{});
+        inspect(list(1, 1, 2, 3, 4, 4, 5, 6), list(1, 4, 5), list(1, 3, 4), list(2, 6));
+        inspect(list(), list());
+        inspect(list());
     }
 
-    private static ListNode list(int[] nums) {
+    private static ListNode list(int... nums) {
         ListNode root = null;
         for (int i = nums.length; --i >= 0; ) {
             ListNode node = new ListNode(nums[i]);
@@ -25,13 +25,9 @@ public class Main {
         return true;
     }
 
-    private static void inspect(int[] expect, int[]... inputs) {
-        ListNode[] list = new ListNode[inputs.length];
-        for (int i = 0; i < inputs.length; i++) {
-            list[i] = list(inputs[i]);
-        }
-        ListNode output = new Solution().mergeKLists(list);
-        if (equals(output, list(expect))) System.out.println("RIGHT");
+    private static void inspect(ListNode expect, ListNode... inputs) {
+        ListNode output = new Solution().mergeKLists(inputs);
+        if (equals(output, expect)) System.out.println("RIGHT");
         else System.err.println("WRONG");
     }
 }
