@@ -5,21 +5,24 @@ class Solution {
         int l = s.length();
         if (l < numRows) return s;
 
-        char[] res = new char[l];
-        int cur = 0;
-
-        int rst = numRows - 1;
-        for (int row = 0; row < numRows; ++row) {
-            for (int i = 0; i < l; ++i) {
-                int n = i / rst;
-                int r = i % rst;
-                if (n % 2 == 1) r = rst - r;
-                if (r == row) {
-                    res[cur++] = s.charAt(i);
-                }
-            }
+        StringBuilder[] rows = new StringBuilder[numRows];
+        for (int r = 0; r < numRows; ++r) {
+            rows[r] = new StringBuilder();
         }
 
-        return String.valueOf(res);
+        int rst = numRows - 1;
+        for (int i = 0; i < l; ++i) {
+            int n = i / rst;
+            int r = i % rst;
+            if (n % 2 == 1) r = rst - r;
+            rows[r].append(s.charAt(i));
+        }
+
+        StringBuilder res = new StringBuilder();
+        for (int r = 0; r < numRows; ++r) {
+            res.append(rows[r]);
+        }
+
+        return res.toString();
     }
 }
