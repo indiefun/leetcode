@@ -8,8 +8,7 @@ public class Main {
     public static int[][] matrix(int row, int col, int... elements) {
         int[][] res = new int[row][col];
         for (int i = 0; i < row; ++i) {
-            res[i] = new int[col];
-            System.arraycopy(elements, i * row, res[i], 0, col);
+            System.arraycopy(elements, i * col, res[i], 0, col);
         }
         return res;
     }
